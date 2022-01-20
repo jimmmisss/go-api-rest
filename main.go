@@ -19,3 +19,5 @@ func main() {
 	fmt.Println("Iniciando o servidor rest")
 	HandleRequest()
 }
+
+//teste
