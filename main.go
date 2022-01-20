@@ -2,22 +2,16 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"net/http"
+	"go-api-rest/models"
+	"go-api-rest/routes"
 )
 
-func Home(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Home Page")
-}
-
-func HandleRequest() {
-	http.HandleFunc("/", Home)
-	log.Fatal(http.ListenAndServe(":8000", nil))
-}
-
 func main() {
-	fmt.Println("Iniciando o servidor rest")
-	HandleRequest()
-}
+	models.Personalidades = []models.Personalidade{
+		{"Wesley Pereira", "História complicada"},
+		{"Fadia Pereira", "História de boa"},
+	}
 
-//teste
+	fmt.Println("Iniciando o servidor rest")
+	routes.HandleRequest()
+}
