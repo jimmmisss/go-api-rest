@@ -34,14 +34,6 @@ func CriaNovaPersonalidade(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(novaPersonalidade)
 }
 
-func Deletar(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	id := vars["id"]
-	var p models.Personalidade
-	database.DB.Delete(&p, id)
-	json.NewEncoder(w).Encode(p)
-}
-
 func Atualizar(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
@@ -49,5 +41,13 @@ func Atualizar(w http.ResponseWriter, r *http.Request) {
 	database.DB.First(&p, id)
 	json.NewDecoder(r.Body).Decode(&p)
 	database.DB.Save(&p)
+	json.NewEncoder(w).Encode(p)
+}
+
+func Deletar(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+	var p models.Personalidade
+	database.DB.Delete(&p, id)
 	json.NewEncoder(w).Encode(p)
 }
